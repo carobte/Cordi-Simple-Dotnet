@@ -36,8 +36,8 @@ namespace CordiSimpleDotnet.Models
         public string Password { get; set; }
 
         [Column("role")]
-        [Required]
-        [MaxLength(10)]
+        [Required(ErrorMessage = "Role is required.")]
+        [MaxLength(100)]
         public string Role { get; set; }
     }
 }
