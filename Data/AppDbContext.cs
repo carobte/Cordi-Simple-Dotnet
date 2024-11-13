@@ -15,5 +15,12 @@ namespace CordiSimpleDotnet.Data
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Seeders
+            UserSeeders.Seed(modelBuilder);
+        }
     }
 }
