@@ -1,0 +1,6 @@
+@CordiSimpleDotnet_HostAddress = http://localhost:5208
+
+GET {{CordiSimpleDotnet_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
