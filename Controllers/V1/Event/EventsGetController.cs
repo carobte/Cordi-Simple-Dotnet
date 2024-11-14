@@ -21,8 +21,8 @@ namespace CordiSimpleDotnet.Controllers.V1.Event
         [SwaggerOperation(
           Summary = "Get events",
           Description = "Returns all the events in database")]
-        [SwaggerResponse(200, "Ok: Returns all the events in database")]
-        [SwaggerResponse(204, "No Content: There are not events in the database")]
+        [SwaggerResponse(200, "Ok: returns all the events in database")]
+        [SwaggerResponse(204, "No Content: there are not events in the database")]
 
         public async Task<IActionResult> Get()
         {
@@ -40,8 +40,8 @@ namespace CordiSimpleDotnet.Controllers.V1.Event
         [SwaggerOperation(
           Summary = "Get event by id",
           Description = "Returns an specific event in database")]
-        [SwaggerResponse(200, "Ok: Returns an specific event in database")]
-        [SwaggerResponse(204, "No Content: There are not events in the database with the given id")]
+        [SwaggerResponse(200, "Ok: returns an specific event in database")]
+        [SwaggerResponse(204, "No Content: there are not events in the database with the given id")]
 
         public async Task<IActionResult> GetById(int id)
         {

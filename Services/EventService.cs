@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CordiSimpleDotnet.Data;
+using CordiSimpleDotnet.DTO.Event;
 using CordiSimpleDotnet.Models;
 using CordiSimpleDotnet.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,7 @@ namespace CordiSimpleDotnet.Services
 {
     public class EventService : IEventRepository
     {
-       protected readonly AppDbContext _context;
+        protected readonly AppDbContext _context;
 
         public EventService(AppDbContext context)
         {
@@ -19,7 +20,7 @@ namespace CordiSimpleDotnet.Services
         }
 
 
-        public async Task Create(Event newEvent)
+        public async Task Create(EventRequest newEvent)
         {
             if (newEvent == null)
             {
@@ -28,7 +29,18 @@ namespace CordiSimpleDotnet.Services
 
             try
             {
-                await _context.Events.AddAsync(newEvent);
+                await _context.Events.AddAsync(new Event
+                {
+                    Name = newEvent.Name,
+                    Description = newEvent.Description,
+                    StartDate = newEvent.StartDate,
+                    EndDate = newEvent.EndDate,
+                    Location = newEvent.Location,
+                    Capacity = newEvent.Capacity,
+                    OccupiedSlots = 0,
+                    Status = newEvent.Status
+                });
+                
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException exception) // Database errors
@@ -52,15 +64,16 @@ namespace CordiSimpleDotnet.Services
 
         public async Task<IEnumerable<Event>> Get()
         {
-            return await _context.Events.ToListAsync();           
+            return await _context.Events.ToListAsync();
         }
 
         public async Task<Event> GetById(int id)
         {
-            var eventFound = await _context.Events.FindAsync(id);    
-            if (eventFound == null )  {
+            var eventFound = await _context.Events.FindAsync(id);
+            if (eventFound == null)
+            {
                 return null;
-            }     
+            }
             return eventFound;
         }
 
