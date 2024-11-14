@@ -18,6 +18,10 @@ namespace CordiSimpleDotnet.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            
+            modelBuilder.Entity<User>() // Unique restriction for user email in database
+                .HasIndex(u => u.Email)
+                .IsUnique();
 
             // Seeders
             UserSeeders.Seed(modelBuilder);
