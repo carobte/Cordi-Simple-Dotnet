@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CordiSimpleDotnet.DTO.Auth;
 using CordiSimpleDotnet.Models;
 using CordiSimpleDotnet.Repositories;
 using CordiSimpleDotnet.Utilities;
@@ -33,7 +34,7 @@ namespace CordiSimpleDotnet.Controllers.V1.Auth
         [SwaggerResponse(200, "Created: User registered successfully")]
         [SwaggerResponse(400, "Bad request")]
 
-        public async Task<IActionResult> Post(User newUser)
+        public async Task<IActionResult> Post(RegisterRequest newUser)
         {
             if (!ModelState.IsValid)
             {

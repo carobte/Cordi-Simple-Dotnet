@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CordiSimpleDotnet.Data;
+using CordiSimpleDotnet.DTO.Auth;
 using CordiSimpleDotnet.Models;
 using CordiSimpleDotnet.Repositories;
 using CordiSimpleDotnet.Utilities;
@@ -22,22 +23,22 @@ namespace CordiSimpleDotnet.Services
             _passwordHasher = passwordHasher;
         }
 
-        public async Task Delete(int id)
+        public Task Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<List<User>> GetAll()
+        public Task<List<User>> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public async Task<User> GetById(int id)
+        public Task<User> GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task Register(User user)
+        public async Task Register(RegisterRequest user)
         {
             if (user == null)
             {
@@ -46,9 +47,15 @@ namespace CordiSimpleDotnet.Services
 
             try
             {
-                user.Password = _passwordHasher.EncryptSHA256(user.Password); // Password Hash
+                await _context.Users.AddAsync(new User
+                {
+                    Name = user.Name,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    Password = _passwordHasher.EncryptSHA256(user.Password), // Password Hash
+                    Role = "client",
+                });
 
-                await _context.Users.AddAsync(user);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException exception) // Database errors
@@ -66,7 +73,7 @@ namespace CordiSimpleDotnet.Services
 
         }
 
-        public async Task Update(int id, User newInfo)
+        public Task Update(int id, User newInfo)
         {
             throw new NotImplementedException();
         }
