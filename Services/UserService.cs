@@ -28,7 +28,7 @@ namespace CordiSimpleDotnet.Services
             throw new NotImplementedException();
         }
 
-        public Task<List<User>> GetAll()
+        public Task<IEnumerable<User>> GetAll()
         {
             throw new NotImplementedException();
         }

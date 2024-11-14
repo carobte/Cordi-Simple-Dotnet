@@ -12,7 +12,7 @@ namespace CordiSimpleDotnet.Repositories
         Task Register(RegisterRequest user);
         Task Update(int id, User newInfo);
         Task Delete(int id);
-        Task<List<User>> GetAll();
+        Task<IEnumerable<User>> GetAll();
         Task<User> GetById(int id);
     }
 }

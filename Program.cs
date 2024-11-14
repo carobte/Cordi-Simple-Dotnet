@@ -29,6 +29,8 @@ builder.Services.AddSingleton<PasswordHasher>();
 
 // Repositories and services
 builder.Services.AddScoped<IUserRepository, UserService>();
+builder.Services.AddScoped<IEventRepository, EventService>();
+
 
 // Controllers and Endpoints
 builder.Services.AddControllers();
