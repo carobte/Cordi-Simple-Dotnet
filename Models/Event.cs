@@ -25,11 +25,11 @@ namespace CordiSimpleDotnet.Models
         public string Description { get; set; }
 
         [Required]
-        [Column("start_date")]
+        [Column("start_date", TypeName = "datetime")]
         public DateTime StartDate { get; set; }
 
         [Required]
-        [Column("end_date")]
+        [Column("end_date", TypeName = "datetime")]
         public DateTime EndDate { get; set; }
 
         [Required]

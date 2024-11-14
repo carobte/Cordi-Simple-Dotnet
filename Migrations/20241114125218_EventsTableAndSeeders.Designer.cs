@@ -4,6 +4,7 @@ using CordiSimpleDotnet.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CordiSimpleDotnet.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241114125218_EventsTableAndSeeders")]
+    partial class EventsTableAndSeeders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,7 +45,7 @@ namespace CordiSimpleDotnet.Migrations
                         .HasColumnName("description");
 
                     b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("end_date");
 
                     b.Property<string>("Location")
@@ -62,7 +65,7 @@ namespace CordiSimpleDotnet.Migrations
                         .HasColumnName("occupied_slots");
 
                     b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("start_date");
 
                     b.Property<bool>("Status")
