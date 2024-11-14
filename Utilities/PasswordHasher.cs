@@ -10,7 +10,7 @@ namespace CordiSimpleDotnet.Utilities
     public class PasswordHasher
     {
          // Method to encrypt a string using SHA25
-        public static string EncryptSHA256(string input)
+        public string EncryptSHA256(string input)
         {
             using (SHA256 sha256Hash = SHA256.Create())
             {

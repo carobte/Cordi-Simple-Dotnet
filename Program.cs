@@ -1,7 +1,10 @@
 using CordiSimpleDotnet.Data;
+using CordiSimpleDotnet.Repositories;
+using CordiSimpleDotnet.Services;
 using CordiSimpleDotnet.Utilities;
 using DotNetEnv;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,12 +23,37 @@ var conectionDB = $"server={dbHost};port={dbPort};database={dbName};uid={dbUser}
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(conectionDB, ServerVersion.Parse("8.0.15-mysql")));
 
+
+
 // Add services to the container.
 
+builder.Services.AddSingleton<PasswordHasher>();
+
+// Repositories and services
+builder.Services.AddScoped<IUserRepository, UserService>();
+
+// Controllers and Endpoints
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "CordiSimple API",
+        Version = "V1",
+        Description = "API for managing an events database. This version includes basic CRUD operations for users, events and reserves.",
+        Contact = new OpenApiContact
+        {
+            Name = "Carolina Bustamante Escobar",
+            Email = "caro.bustamante.escobar@gmail.com",
+            Url = new Uri("https://www.linkedin.com/in/caro-bustamante-escobar")
+        }
+    }
+         );
+
+    c.EnableAnnotations();
+});
 
 var app = builder.Build();
 
